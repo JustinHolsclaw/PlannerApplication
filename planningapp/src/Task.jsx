@@ -1,12 +1,12 @@
 
-function Task(task){
-    
+function Task(Todo){
+    const todoList = Todo
     
     return(
         <>
             <div className="row">
-                <h1>{task.title}</h1>
-                <h2>{task.description}</h2>
+                <h1>{todoList.title}</h1>
+                <h2>{todoList.description}</h2>
             </div>
         </>
     );
