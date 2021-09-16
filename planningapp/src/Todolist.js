@@ -8,7 +8,7 @@ const TodoList =[
 {
     "Title": "Do the Other Thing",
     "Date": "9/14/21",
-    "Time": "1930"
+    "Time": "13:25"
 }
 ]
 export default TodoList;

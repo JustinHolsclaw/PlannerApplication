@@ -6,7 +6,8 @@ function Task(Todo){
         <>
             <div className="row">
                 <h1>{todoList.title}</h1>
-                <h2>{todoList.description}</h2>
+                <h2>{todoList.date}</h2>
+                <h2>{todoList.time}</h2>
             </div>
         </>
     );
