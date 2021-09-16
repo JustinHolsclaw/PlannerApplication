@@ -3,12 +3,12 @@ const TodoList =[
 {
     "Title": "Do The Thing",
     "Date": "9/14/21",
-    "Description": "just do it"
+    "Time": "1900"
 },
 {
     "Title": "Do the Other Thing",
     "Date": "9/14/21",
-    "Description": "I'm waiting"
+    "Time": "1930"
 }
 ]
 export default TodoList;
