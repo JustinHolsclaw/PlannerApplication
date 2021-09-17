@@ -1,8 +1,8 @@
 import './App.css';
-import { useState } from 'react';
+import React from 'react';
 import Todo from './Todo';
 import 'bootstrap/scss/bootstrap.scss';
-import AddNewTask from './AddNewTask'
+
 
 let TodoList =[
   {
@@ -15,21 +15,23 @@ let TodoList =[
       "Date": "9/14/21",
       "Time": "13:25"
   },
+  {
+    "Title": "Do Stuff",
+    "Date": "9/14/21",
+    "Time": "13:25"
+  },
 ]
 
-const [updateableTodoList, setUpdateableTodoList] = useState(TodoList)
-
 const handleAddTask = (newTask) => {
-    TodoList = TodoList.concat(newTask)
-    setUpdateableTodoList(TodoList)
+    TodoList = newTask
+    console.log(TodoList)
 }
 
 function App() {
 
   return (
    <>
-    <Todo todolist = {TodoList}/>
-    <AddNewTask todolist = {TodoList} handleAddTask={handleAddTask}/>
+    <Todo todolist={TodoList} handleNewTask={handleAddTask}/>
    </>
   );
 }
