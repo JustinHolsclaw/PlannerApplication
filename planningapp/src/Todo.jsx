@@ -1,17 +1,18 @@
 import { useState } from "react";
 import Task from "./Task";
-import EditForm from "./EditForm";
 import styles from "../src/styles/Todo.module.scss"
 const bootstrap = require('bootstrap')
 
 function Todo(props){
 const [todoList, setTodoList] = useState(props.todolist)
-const [taskTitle, setTaskToAdd] = useState('')
+const [taskTitle, setTaskTitle] = useState('')
 const [recievedTime, setRecievedTime] = useState('')
 const [receivedDate, setReceivedDate] = useState('')
+const [isTitleNull, setIsTitleNull] = useState(false)
 
 const handleAddTask= (e) =>{
-    setTaskToAdd(e.target.value);
+    setTaskTitle(e.target.value);
+    setIsTitleNull(false)
 }
 const handleDateChange = (e) => {
     setReceivedDate(e.target.value)
@@ -32,6 +33,10 @@ const checkDate = () =>{
 
 const addNewTask = () =>{
     checkDate();
+    if(taskTitle.trim().length == 0){
+        setIsTitleNull(true)
+        return
+    }
     const newTask=[{
         "Title": taskTitle,
         "Date": receivedDate,
@@ -44,7 +49,9 @@ const addNewTask = () =>{
     props.handleNewTask(concatedList)
 }
 
+const [taskToBeDeleted, setTaskToBeDeleted] = useState('')
 const deleteTask = (evt) => {
+    setTaskToBeDeleted(evt.target.id)
     let newTodoList = todoList
     for( var i = 0; i < todoList.length; i++){ 
         if(todoList[i].Title === evt.target.id){
@@ -54,24 +61,17 @@ const deleteTask = (evt) => {
     SetNewTodo(newTodoList)    
 }
 
-const updateTask = (evt) => {
-    /*let newTodoList = todoList
-    for( var i = 0; i < todoList.length; i++){ 
-        if(todoList[i].Title === evt.target.id){
-            todoList[i].Title = 
-        }
-    }
-    SetNewTodo(newTodoList)
-    */
-}
 
 function SetNewTodo(task){
     setTodoList(task)
 }
+
+
     return(
         <>  
             <div className={styles.filterContainer, "row"}>
-                <input type="text" className={styles.taskTitle, "col"}  placeholder="ex. go to the store" value={taskTitle} onChange={handleAddTask}/>
+                <label className={styles.taskLabel}>Task</label>
+                <input type="text" className={ `${styles.taskTitle} ${isTitleNull && styles.taskTitleNull} col`}  placeholder="ex. go to the store" value={taskTitle} onChange={handleAddTask}/>
                 <input type="date" className={styles.date, "col"} value={receivedDate} onChange={handleDateChange}/>
                 <input type="time" className={styles.time,"col"} value={recievedTime} onChange={handleTimeChange}/>
                 <button type="button" className={styles.newTaskBtn, 'btn btn-secondary'} onClick={addNewTask}>Add new Task</button>
@@ -81,12 +81,11 @@ function SetNewTodo(task){
                 todoList.map(element => {
                     return( 
                             <>
-                                <Task title={element.Title} date={element.Date} time={element.Time} deleteTask={deleteTask} updateTask={updateTask}/>
+                                <Task title={element.Title} date={element.Date} time={element.Time} deleteTask={deleteTask} taskToBeDeleted={taskToBeDeleted}/>
                             </>
                     )}
                 )
             }
-            
             </div>
         </>
     )

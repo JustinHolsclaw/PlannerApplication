@@ -1,20 +1,27 @@
 .filterContainer{
     background-color: black;
-    padding:50%;
 }
 
 .taskTitle{
-    
+    font-size: x-large;
+}
+
+.taskTitle.taskTitleNull{
+    background-color: salmon;
 }
 
 .date{
-
+    font-size: x-large;
 }
 
 .time{
-
+    font-size: x-large;
 }
 
 .newTaskBtn{
     
+}
+
+.taskLabel{
+    font-size: xx-large;
 }
